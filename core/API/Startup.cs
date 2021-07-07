@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Application.User;
+using API.Application.Users;
 using API.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

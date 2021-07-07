@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 using API.Entities;
-using API.Application.User;
+using API.Application.Users;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -20,12 +21,19 @@ namespace API.Controllers
         
         // GET api/users
         [HttpGet]
-        public async Task<IEnumerable<AppUser>> List()
+        public async Task<ActionResult<IEnumerable<AppUser>>> List()
         {
             var query = new List.Query();
             var response = await Mediator.Send(query);
 
-            return response;
+            return response.ToList();
+        }
+
+        // GET api/users/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AppUser>> GetUser(int id)
+        {
+            return await Mediator.Send(new User.Query { Id = id});
         }
     }
 }

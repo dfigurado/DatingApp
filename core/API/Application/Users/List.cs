@@ -7,7 +7,7 @@ using API.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Application.User
+namespace API.Application.Users
 {
     public class List
     {
