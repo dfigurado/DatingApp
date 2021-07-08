@@ -36,16 +36,6 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
-            services.AddCors(opt => {
-                opt.AddPolicy("CorsPolicy", policy => {
-                    policy
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .WithExposedHeaders()
-                        .WithOrigins("http://localhost:3000")
-                        .AllowCredentials();
-                });
-            });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
@@ -69,6 +59,8 @@ namespace API
 
             app.UseRouting();
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
